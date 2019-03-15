@@ -87,5 +87,13 @@ namespace C0732116
             m_frozen = false;
         }
 
+        public static void Main()
+        {
+            BankAccounts ba = new BankAccounts("Mr. Bryan Walton", 11.99);
+            ba.Credit(5.77);
+            ba.Debit(11.22);
+            Console.WriteLine("Current balance is ${0} ", ba.Balance);
+        }
+
     }
 }
