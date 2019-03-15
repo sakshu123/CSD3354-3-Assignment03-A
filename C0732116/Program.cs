@@ -58,6 +58,23 @@ namespace C0732116
             {
                 throw new ArgumentOutOfRangeException("amount");
             }
+
+            m_balance += amount;
+        }
+
+        public void Credit (double amount)
+        {
+            if (m_frozen)
+            {
+                throw new Exception("Account frozen");
+            }
+
+            if (amount < 0)
+            {
+                throw new ArgumentOutOfRangeException("amount");
+            }
+
+            m_balance += amount;
         }
             
     }
