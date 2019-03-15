@@ -11,58 +11,55 @@ using System.Threading.Tasks;
 
 namespace C0732116
 {
-    class BankAccounts
+    /// <summary>
+    /// Bank Account demo class.
+    /// </summary>
+    public class BankAccount
     {
-        private String m_customerName;
-        private double m_balance;
-        private bool m_frozen = false;
-        private BankAccounts()
-        {
+        public const string DebitAmountExceedsBalanceMessage = "Debit amount exceeds balance";
+        public const string DebitAmountLessThanZeroMessage = "Debit amount is less than Zero";
+        private string m_customerName;
 
+        private double m_balance;
+
+        private bool m_frozen = false;
+
+        private BankAccount()
+        {
         }
-        public BankAccounts (String customerName, double balance)
+
+        public BankAccount(string customerName, double balance)
         {
             m_customerName = customerName;
             m_balance = balance;
         }
 
-        public String CustomerName
+        public string CustomerName
         {
-            get
-            {
-                return m_customerName;
-            }
+            get { return m_customerName; }
         }
+
         public double Balance
         {
-            get
-            {
-                return m_balance;
-            }
+            get { return m_balance; }
         }
 
-        public void Debit (double amount)
+        public void Debit(double amount)
         {
-
-            if (m_frozen)
-            {
-                throw new Exception("Account Frozen");
-            }
-
             if (amount > m_balance)
             {
-                throw new ArgumentOutOfRangeException("amount");
+                throw new ArgumentOutOfRangeException("amount", amount, DebitAmountExceedsBalanceMessage);
             }
 
             if (amount < 0)
             {
-                throw new ArgumentOutOfRangeException("amount");
+                throw new ArgumentOutOfRangeException("amount", amount, DebitAmountLessThanZeroMessage);
             }
 
-            m_balance += amount;
+            m_balance -= amount; // intentionally incorrect code
         }
 
-        public void Credit (double amount)
+        public void Credit(double amount)
         {
             if (m_frozen)
             {
@@ -76,8 +73,8 @@ namespace C0732116
 
             m_balance += amount;
         }
-        
-        private void FreezeAccount ()
+
+        private void FreezeAccount()
         {
             m_frozen = true;
         }
@@ -89,11 +86,11 @@ namespace C0732116
 
         public static void Main()
         {
-            BankAccounts ba = new BankAccounts("Mr. Bryan Walton", 11.99);
+            BankAccount ba = new BankAccount("Mr. Bryan Walton", 11.99);
+
             ba.Credit(5.77);
             ba.Debit(11.22);
-            Console.WriteLine("Current balance is ${0} ", ba.Balance);
+            Console.WriteLine("Current balance is ${0}", ba.Balance);
         }
-
     }
 }
