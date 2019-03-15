@@ -76,6 +76,16 @@ namespace C0732116
 
             m_balance += amount;
         }
-            
+        
+        private void FreezeAccount ()
+        {
+            m_frozen = true;
+        }
+
+        private void UnfreezeAccount()
+        {
+            m_frozen = false;
+        }
+
     }
 }
