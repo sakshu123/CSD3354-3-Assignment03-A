@@ -1,6 +1,5 @@
 ﻿using System;
 using C0732116;
-using C0732116;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BankTests
